@@ -28,53 +28,33 @@
       opacity: 0;
       transform: scale(0.95);
     }
-    .terms {
-      font-size: 10px;
-      position: absolute;
-      bottom: 10px;
+    .terms-banner {
+      position: fixed;
+      bottom: 0;
       width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
       text-align: center;
+      padding: 10px;
+      font-size: 14px;
     }
-    .terms a {
-      color: blue;
+    .terms-banner a {
+      color: lightblue;
       text-decoration: underline;
     }
-    /* Popup styles */
-    .popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .popup-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      width: 80%;
-      max-width: 400px;
-    }
-    .popup button {
-      margin-top: 10px;
-      padding: 10px;
-      font-size: 16px;
+    .terms-banner button {
+      margin-left: 10px;
+      padding: 5px 10px;
       cursor: pointer;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
-  <div class="popup" id="termsPopup">
-    <div class="popup-content">
-      <p>By using this website, you agree to the 
-        <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.
-      </p>
-      <button onclick="acceptTerms()">I Agree</button>
-    </div>
+  <div class="terms-banner" id="termsBanner">
+    By using this website, you agree to the 
+    <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.
+    <button onclick="acceptTerms()">OK</button>
   </div>
 
   <h1>Can I have a Jolly Rancher?</h1>
@@ -82,10 +62,6 @@
     <button id="yes-btn" class="btn" onclick="alert('Thank you!')">Yes</button>
     <button id="no-btn" class="btn" onmouseover="swapButtons()">No</button>
   </div>
-  <p class="terms">
-    By using this website you agree to the 
-    <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.
-  </p>
 
   <script>
     function swapButtons() {
@@ -108,7 +84,7 @@
     }
 
     function acceptTerms() {
-      document.getElementById('termsPopup').style.display = 'none';
+      document.getElementById('termsBanner').style.display = 'none';
     }
   </script>
 </body>
