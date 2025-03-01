@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can I have a Jolly Rancher?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 20%;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+    }
+    .btn {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    #yes-btn, #no-btn {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <h1>Can I have a Jolly Rancher?</h1>
+  <div class="btn-container">
+    <button id="yes-btn" class="btn" onclick="alert('Thank you')">Yes</button>
+    <button id="no-btn" class="btn" onmouseover="swapButtons()">No</button>
+  </div>
+
+  <script>
+    function swapButtons() {
+      const yesBtn = document.getElementById('yes-btn');
+      const noBtn = document.getElementById('no-btn');
+
+      // Get current positions
+      const yesRect = yesBtn.getBoundingClientRect();
+      const noRect = noBtn.getBoundingClientRect();
+
+      // Swap positions
+      yesBtn.style.transform = `translate(${noRect.left - yesRect.left}px, ${noRect.top - yesRect.top}px)`;
+      noBtn.style.transform = `translate(${yesRect.left - noRect.left}px, ${yesRect.top - noRect.top}px)`;
+    }
+  </script>
+</body>
+</html>
