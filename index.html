@@ -9,21 +9,28 @@
       font-family: Arial, sans-serif;
       text-align: center;
       margin-top: 20%;
+      position: relative;
+      min-height: 100vh;
     }
     .btn-container {
       display: flex;
       justify-content: center;
       gap: 20px;
+      position: relative;
     }
     .btn {
       padding: 10px 20px;
       font-size: 18px;
       cursor: pointer;
       transition: all 0.3s ease;
+      position: relative;
     }
     .terms {
-      margin-top: 50px;
-      font-size: 12px;
+      font-size: 10px;
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
     }
     .terms a {
       color: blue;
@@ -34,7 +41,7 @@
 <body>
   <h1>Can I have a Jolly Rancher?</h1>
   <div class="btn-container">
-    <button id="yes-btn" class="btn" onclick="alert('Thank you, any button clicked means you agreed to the terms and conditions of use which means you owe me a jolly rancher anyways.')">Yes</button>
+    <button id="yes-btn" class="btn" onclick="alert('Thank you')">Yes</button>
     <button id="no-btn" class="btn" onmouseover="swapButtons()">No</button>
   </div>
   <p class="terms">By using this website you agree to the <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.</p>
@@ -43,13 +50,11 @@
     function swapButtons() {
       const yesBtn = document.getElementById('yes-btn');
       const noBtn = document.getElementById('no-btn');
-      
-      // Swap positions
-      const yesPosition = yesBtn.style.transform;
-      const noPosition = noBtn.style.transform;
-      
-      yesBtn.style.transform = noPosition || 'translate(0, 0)';
-      noBtn.style.transform = yesPosition || 'translate(0, 0)';
+      const yesRect = yesBtn.getBoundingClientRect();
+      const noRect = noBtn.getBoundingClientRect();
+
+      yesBtn.style.transform = `translate(${noRect.left - yesRect.left}px, ${noRect.top - yesRect.top}px)`;
+      noBtn.style.transform = `translate(${yesRect.left - noRect.left}px, ${yesRect.top - noRect.top}px)`;
     }
   </script>
 </body>
