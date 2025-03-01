@@ -24,7 +24,6 @@
       cursor: pointer;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    /* The fade class will animate opacity (and optionally, you can animate position using transform) */
     .fade {
       opacity: 0;
       transform: scale(0.95);
@@ -40,9 +39,44 @@
       color: blue;
       text-decoration: underline;
     }
+    /* Popup styles */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+    }
+    .popup button {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+  <div class="popup" id="termsPopup">
+    <div class="popup-content">
+      <p>By using this website, you agree to the 
+        <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.
+      </p>
+      <button onclick="acceptTerms()">I Agree</button>
+    </div>
+  </div>
+
   <h1>Can I have a Jolly Rancher?</h1>
   <div class="btn-container">
     <button id="yes-btn" class="btn" onclick="alert('Thank you!')">Yes</button>
@@ -50,9 +84,7 @@
   </div>
   <p class="terms">
     By using this website you agree to the 
-    <a href="https://sites.google.com/view/termsparker/home" target="_blank">
-      terms and conditions
-    </a>.
+    <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.
   </p>
 
   <script>
@@ -61,11 +93,9 @@
       const yesBtn = document.getElementById('yes-btn');
       const noBtn = document.getElementById('no-btn');
       
-      // Add the fade class to both buttons to trigger the transition (fade out and slight scale)
       yesBtn.classList.add('fade');
       noBtn.classList.add('fade');
 
-      // Wait for the transition to finish (300ms) then swap and remove the fade class to fade in
       setTimeout(() => {
         if (container.firstElementChild === yesBtn) {
           container.insertBefore(noBtn, yesBtn);
@@ -75,6 +105,10 @@
         yesBtn.classList.remove('fade');
         noBtn.classList.remove('fade');
       }, 300);
+    }
+
+    function acceptTerms() {
+      document.getElementById('termsPopup').style.display = 'none';
     }
   </script>
 </body>
