@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Can I have a Jolly Rancher?</title>
   <style>
     body {
@@ -43,17 +43,26 @@
     <button id="yes-btn" class="btn" onclick="alert('Thank you!')">Yes</button>
     <button id="no-btn" class="btn" onmouseover="swapButtons()">No</button>
   </div>
-  <p class="terms">By using this website you agree to the <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.</p>
+  <p class="terms">
+    By using this website you agree to the 
+    <a href="https://sites.google.com/view/termsparker/home" target="_blank">
+      terms and conditions
+    </a>.
+  </p>
 
   <script>
     function swapButtons() {
+      const container = document.querySelector('.btn-container');
       const yesBtn = document.getElementById('yes-btn');
       const noBtn = document.getElementById('no-btn');
       
-      const yesBtnParent = yesBtn.parentNode;
-      const noBtnParent = noBtn.parentNode;
-      
-      yesBtnParent.insertBefore(noBtn, yesBtn);
+      // If the first element is the "Yes" button, swap by inserting the "No" button first.
+      if (container.firstElementChild === yesBtn) {
+        container.insertBefore(noBtn, yesBtn);
+      } else {
+        // Otherwise, swap back by inserting the "Yes" button before the "No" button.
+        container.insertBefore(yesBtn, noBtn);
+      }
     }
   </script>
 </body>
