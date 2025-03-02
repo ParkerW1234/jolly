@@ -3,48 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Can I have a Jolly Rancher?</title>
+  <title>Can I Have a Jolly Rancher?</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       text-align: center;
-      margin-top: 20%;
-      position: relative;
-      min-height: 100vh;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
     .btn-container {
       display: flex;
       justify-content: center;
       gap: 20px;
-      position: relative;
+      margin-top: 20px;
     }
     .btn {
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-size: 18px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease;
     }
-    .fade {
-      opacity: 0;
-      transform: scale(0.95);
+    .btn-yes {
+      background: #28a745;
+      color: white;
+    }
+    .btn-no {
+      background: #dc3545;
+      color: white;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      opacity: 0.9;
     }
     .terms-banner {
       position: fixed;
-      bottom: 0;
-      width: 100%;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       background: rgba(0, 0, 0, 0.8);
       color: white;
       text-align: center;
-      padding: 10px;
+      padding: 10px 20px;
       font-size: 14px;
+      border-radius: 10px;
     }
     .terms-banner a {
-      color: lightblue;
-      text-decoration: underline;
+      color: #00c3ff;
+      text-decoration: none;
+      font-weight: bold;
     }
     .terms-banner button {
       margin-left: 10px;
-      padding: 5px 10px;
+      padding: 5px 12px;
+      border: none;
+      background: #00c3ff;
+      color: white;
+      border-radius: 5px;
       cursor: pointer;
       font-size: 14px;
     }
@@ -57,10 +90,12 @@
     <button onclick="acceptTerms()">OK</button>
   </div>
 
-  <h1>Can I have a Jolly Rancher?</h1>
-  <div class="btn-container">
-    <button id="yes-btn" class="btn" onclick="alert('Thank you!')">Yes</button>
-    <button id="no-btn" class="btn" onmouseover="swapButtons()">No</button>
+  <div class="container">
+    <h1>Can I Have a Jolly Rancher?</h1>
+    <div class="btn-container">
+      <button id="yes-btn" class="btn btn-yes" onclick="alert('Thank you!')">Yes</button>
+      <button id="no-btn" class="btn btn-no" onmouseover="swapButtons()">No</button>
+    </div>
   </div>
 
   <script>
@@ -69,8 +104,8 @@
       const yesBtn = document.getElementById('yes-btn');
       const noBtn = document.getElementById('no-btn');
       
-      yesBtn.classList.add('fade');
-      noBtn.classList.add('fade');
+      yesBtn.style.opacity = '0';
+      noBtn.style.opacity = '0';
 
       setTimeout(() => {
         if (container.firstElementChild === yesBtn) {
@@ -78,8 +113,8 @@
         } else {
           container.insertBefore(yesBtn, noBtn);
         }
-        yesBtn.classList.remove('fade');
-        noBtn.classList.remove('fade');
+        yesBtn.style.opacity = '1';
+        noBtn.style.opacity = '1';
       }, 300);
     }
 
