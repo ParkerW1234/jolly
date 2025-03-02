@@ -54,6 +54,9 @@
       transform: scale(1.1);
       opacity: 0.9;
     }
+    .hidden {
+      display: none;
+    }
     .terms-banner {
       position: fixed;
       bottom: 10px;
@@ -81,6 +84,22 @@
       cursor: pointer;
       font-size: 14px;
     }
+    .btn-link {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 15px 30px;
+      font-size: 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+    .btn-link:hover {
+      background: #0056b3;
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -90,12 +109,17 @@
     <button onclick="acceptTerms()">OK</button>
   </div>
 
-  <div class="container">
+  <div class="container" id="main-container">
     <h1>Can I Have a Jolly Rancher?</h1>
     <div class="btn-container">
-      <button id="yes-btn" class="btn btn-yes" onclick="window.location.href='thank-you.html'">Yes</button>
+      <button id="yes-btn" class="btn btn-yes" onclick="showThankYou()">Yes</button>
       <button id="no-btn" class="btn btn-no" onmouseover="swapButtons()">No</button>
     </div>
+  </div>
+
+  <div class="container hidden" id="thank-you-container">
+    <h1>Thank You!</h1>
+    <a href="https://www.amazon.com/s?k=jolly+ranchers" target="_blank" class="btn-link">What if I don't have any?</a>
   </div>
 
   <script>
@@ -120,6 +144,11 @@
 
     function acceptTerms() {
       document.getElementById('termsBanner').style.display = 'none';
+    }
+
+    function showThankYou() {
+      document.getElementById('main-container').classList.add('hidden');
+      document.getElementById('thank-you-container').classList.remove('hidden');
     }
   </script>
 </body>
