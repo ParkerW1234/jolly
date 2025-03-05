@@ -1,155 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Can I Have a Jolly Rancher?</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      text-align: center;
-      background: linear-gradient(to right, #ff758c, #ff7eb3);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
-    .btn {
-      padding: 12px 24px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .btn-yes {
-      background: #28a745;
-      color: white;
-    }
-    .btn-no {
-      background: #dc3545;
-      color: white;
-    }
-    .btn:hover {
-      transform: scale(1.1);
-      opacity: 0.9;
-    }
-    .hidden {
-      display: none;
-    }
-    .terms-banner {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      text-align: center;
-      padding: 10px 20px;
-      font-size: 14px;
-      border-radius: 10px;
-    }
-    .terms-banner a {
-      color: #00c3ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .terms-banner button {
-      margin-left: 10px;
-      padding: 5px 12px;
-      border: none;
-      background: #00c3ff;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    .btn-link {
-      display: inline-block;
-      background: #007bff;
-      color: white;
-      padding: 15px 30px;
-      font-size: 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      margin-top: 20px;
-    }
-    .btn-link:hover {
-      background: #0056b3;
-      transform: scale(1.1);
-    }
-  </style>
+<title>Yes or No</title>
+<style>
+  body {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  #noButton {
+    position: relative; /* Important for positioning relative to the container */
+    transition: all 0.1s ease; /* smooth transition for the move effect */
+  }
+
+  #message {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: green;
+    display: none; /* Initially hidden */
+  }
+</style>
 </head>
 <body>
-  <div class="terms-banner" id="termsBanner">
-    By using this website, you agree to the 
-    <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.
-    <button onclick="acceptTerms()">OK</button>
-  </div>
 
-  <div class="container" id="main-container">
-    <h1>Can I Have a Jolly Rancher?</h1>
-    <div class="btn-container">
-      <button id="yes-btn" class="btn btn-yes" onclick="showThankYou()">Yes</button>
-      <button id="no-btn" class="btn btn-no" onmouseover="swapButtons()">No</button>
-    </div>
-  </div>
+<h1>Do you like this question?</h1>
 
-  <div class="container hidden" id="thank-you-container">
-    <h1>Thank You!</h1>
-    <a href="https://www.amazon.com/s?k=jolly+ranchers" target="_blank" class="btn-link">What if I don't have any?</a>
-  </div>
+<div class="container">
+  <button id="yesButton">Yes</button>
+  <button id="noButton">No</button>
+</div>
 
-  <script>
-    function swapButtons() {
-      const container = document.querySelector('.btn-container');
-      const yesBtn = document.getElementById('yes-btn');
-      const noBtn = document.getElementById('no-btn');
-      
-      yesBtn.style.opacity = '0';
-      noBtn.style.opacity = '0';
+<p id="message">Great!  I knew you'd say yes!</p>
 
-      setTimeout(() => {
-        if (container.firstElementChild === yesBtn) {
-          container.insertBefore(noBtn, yesBtn);
-        } else {
-          container.insertBefore(yesBtn, noBtn);
-        }
-        yesBtn.style.opacity = '1';
-        noBtn.style.opacity = '1';
-      }, 300);
+<script>
+  const yesButton = document.getElementById("yesButton");
+  const noButton = document.getElementById("noButton");
+  const message = document.getElementById("message");
+
+  yesButton.addEventListener("click", function() {
+    message.style.display = "block"; // Show the message
+  });
+
+  noButton.addEventListener("mousemove", function(event) {
+    const buttonWidth = noButton.offsetWidth;
+    const buttonHeight = noButton.offsetHeight;
+
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    // Calculate the distance between the cursor and the button center
+    const distanceX = event.clientX - (noButton.offsetLeft + buttonWidth / 2);
+    const distanceY = event.clientY - (noButton.offsetTop + buttonHeight / 2);
+
+    // Define the "escape radius" (how close the mouse needs to be to trigger the move)
+    const escapeRadius = 75; // Adjust as needed
+
+    if (Math.abs(distanceX) < escapeRadius && Math.abs(distanceY) < escapeRadius) {
+      // Calculate new position. Try to make sure it stays on the screen.
+      let newX = noButton.offsetLeft + (distanceX > 0 ? -50 : 50); // Move away horizontally
+      let newY = noButton.offsetTop + (distanceY > 0 ? -50 : 50); // Move away vertically
+
+      // Keep the button within the window bounds
+      newX = Math.max(0, Math.min(newX, windowWidth - buttonWidth));
+      newY = Math.max(0, Math.min(newY, windowHeight - buttonHeight));
+
+      noButton.style.left = newX + "px";
+      noButton.style.top = newY + "px";
     }
+  });
+</script>
 
-    function acceptTerms() {
-      document.getElementById('termsBanner').style.display = 'none';
-    }
-
-    function showThankYou() {
-      document.getElementById('main-container').classList.add('hidden');
-      document.getElementById('thank-you-container').classList.remove('hidden');
-    }
-  </script>
 </body>
 </html>
