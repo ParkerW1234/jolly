@@ -49,6 +49,8 @@
     .btn-no {
       background: #dc3545;
       color: white;
+      position: relative; /* Required for moving the button */
+      transition: all 0.2s ease; /* Smooth movement */
     }
     .btn:hover {
       transform: scale(1.1);
@@ -104,7 +106,7 @@
 </head>
 <body>
   <div class="terms-banner" id="termsBanner">
-    By using this website, you agree to the 
+    By using this website, you agree to the
     <a href="https://sites.google.com/view/termsparker/home" target="_blank">terms and conditions</a>.
     <button onclick="acceptTerms()">OK</button>
   </div>
@@ -113,7 +115,7 @@
     <h1>Can I Have a Jolly Rancher?</h1>
     <div class="btn-container">
       <button id="yes-btn" class="btn btn-yes" onclick="showThankYou()">Yes</button>
-      <button id="no-btn" class="btn btn-no" onmouseover="swapButtons()">No</button>
+      <button id="no-btn" class="btn btn-no">No</button>
     </div>
   </div>
 
@@ -123,24 +125,32 @@
   </div>
 
   <script>
-    function swapButtons() {
-      const container = document.querySelector('.btn-container');
-      const yesBtn = document.getElementById('yes-btn');
-      const noBtn = document.getElementById('no-btn');
-      
-      yesBtn.style.opacity = '0';
-      noBtn.style.opacity = '0';
+    const noBtn = document.getElementById('no-btn');
 
-      setTimeout(() => {
-        if (container.firstElementChild === yesBtn) {
-          container.insertBefore(noBtn, yesBtn);
-        } else {
-          container.insertBefore(yesBtn, noBtn);
-        }
-        yesBtn.style.opacity = '1';
-        noBtn.style.opacity = '1';
-      }, 300);
-    }
+    noBtn.addEventListener('mousemove', function(event) {
+      const buttonWidth = noBtn.offsetWidth;
+      const buttonHeight = noBtn.offsetHeight;
+      const containerRect = document.querySelector('.container').getBoundingClientRect(); // Get container position
+      const containerWidth = containerRect.width;
+      const containerHeight = containerRect.height;
+
+      const distanceX = event.clientX - (noBtn.offsetLeft + buttonWidth / 2 + containerRect.left);
+      const distanceY = event.clientY - (noBtn.offsetTop + buttonHeight / 2 + containerRect.top);
+
+      const escapeRadius = 75;
+
+      if (Math.abs(distanceX) < escapeRadius && Math.abs(distanceY) < escapeRadius) {
+        let newX = noBtn.offsetLeft + (distanceX > 0 ? -50 : 50);
+        let newY = noBtn.offsetTop + (distanceY > 0 ? -50 : 50);
+
+        // Keep the button within the container bounds
+        newX = Math.max(0, Math.min(newX, containerWidth - buttonWidth));
+        newY = Math.max(0, Math.min(newY, containerHeight - buttonHeight));
+
+        noBtn.style.left = newX + "px";
+        noBtn.style.top = newY + "px";
+      }
+    });
 
     function acceptTerms() {
       document.getElementById('termsBanner').style.display = 'none';
